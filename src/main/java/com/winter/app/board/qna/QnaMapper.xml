@@ -5,11 +5,29 @@
   
   <mapper namespace="com.winter.app.board.qna.QnaMapper">
   
-  	<select id="list" resultType="QnaDTO">
+  	<select id="getCount">
+  		SELECT COUNT("BOARD_NUM") FROM "TB_QNA"
+  		<include refid="search_sql"></include>
+  	</select>
+  
+  	<sql id="search_sql">
+  		WHERE
+  			<choose>
+  				<when test="kind=='v2'">"BOARD_CONTENTS"</when>
+  				<when test="kind=='v3'">"BOARD_WRITER"</when>
+  				<otherwise>"BOARD_TITLE"</otherwise>
+  			</choose>
+  		LIKE CONCAT('%', #{search}, '%')
+  	</sql>
+  
+  	<select id="list" resultType="QnaDTO" parameterType="Pager">
   		SELECT * FROM "TB_QNA"
+  		<include refid="search_sql"></include>
+  		ORDER BY "BOARD_NUM" DESC
+  		LIMIT #{perPage} OFFSET #{startNum}
   	</select>
   	
-  	<insert id="create" parameterType="QnaDTO">
+  	<insert id="create" parameterType="QnaDTO" useGeneratedKeys="true" keyProperty="boardNum">
   		INSERT INTO "TB_QNA" VALUES (
   			DEFAULT,
   			#{boardTitle},
@@ -20,6 +38,15 @@
   			0,
   			0,
   			0
+  		)
+  	</insert>
+  	
+  	<insert id="createFile" parameterType="QnaFileDTO">
+  		INSERT INTO "TB_QNAFILE" VALUES(
+  			DEFAULT,
+  			#{fileName},
+  			#{oriName},
+  			#{boardNum}
   		)
   	</insert>
   

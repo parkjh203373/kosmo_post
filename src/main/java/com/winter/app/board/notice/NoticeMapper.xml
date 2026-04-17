@@ -5,11 +5,29 @@
   
   <mapper namespace="com.winter.app.board.notice.NoticeMapper">
   
-  	<select id="list" resultType="NoticeDTO">
+  	<select id="getCount" resultType="Long" parameterType="Pager">
+  		SELECT COUNT("BOARD_NUM") FROM "TB_NOTICE"
+  		<include refid="search_sql"></include>
+  	</select>
+  
+  	<sql id="search_sql">
+  		WHERE
+  			<choose>
+  				<when test="kind=='v2'">"BOARD_CONTENTS"</when>
+  				<when test="kind=='v3'">"BOARD_WRITER"</when>
+  				<otherwise>"BOARD_TITLE"</otherwise>
+  			</choose>
+  		LIKE CONCAT('%', #{search}, '%')
+  	</sql>
+  
+  	<select id="list" resultType="NoticeDTO" parameterType="Pager">
   		SELECT * FROM "TB_NOTICE"
+  		<include refid="search_sql"></include>
+  		ORDER BY "BOARD_NUM" DESC
+  		LIMIT #{perPage} OFFSET #{startNum}
   	</select>
   	
-  	<insert id="create" parameterType="NoticeDTO">
+  	<insert id="create" parameterType="NoticeDTO" useGeneratedKeys="true" keyProperty="boardNum">
   		INSERT INTO "TB_NOTICE" VALUES (
   			DEFAULT,
   			#{boardTitle},
@@ -17,6 +35,15 @@
   			#{boardContents},
   			NOW(),
   			0
+  		)
+  	</insert>
+  	
+  	<insert id="createFile" parameterType="NoticeFileDTO">
+  		INSERT INTO "TB_NOTICEFILE" VALUES(
+  			DEFAULT,
+  			#{fileName},
+  			#{oriName},
+  			#{boardNum}
   		)
   	</insert>
   

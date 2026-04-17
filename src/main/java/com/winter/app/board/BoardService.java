@@ -2,16 +2,11 @@ package com.winter.app.board;
 
 import java.util.List;
 
-import com.winter.app.file.FileDTO;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.winter.app.pager.Pager;
 
-public interface BoardMapper {
-	
-	public Long getCount(Pager pager) throws Exception;
-	
-	public int createFile(FileDTO fileDTO) throws Exception;
-	
-	//CRUD
+public interface BoardService {
 	
 	//Read
 	//list, detail
@@ -20,13 +15,12 @@ public interface BoardMapper {
 	public BoardDTO detail(BoardDTO boardDTO) throws Exception;
 	
 	//Create
-	public int create(BoardDTO boardDTO) throws Exception;
+	public int create(BoardDTO boardDTO, MultipartFile[] attach) throws Exception;
 	
 	//Update
 	public int update(BoardDTO boardDTO) throws Exception;
 	
 	//Delete
 	public int delete(BoardDTO boardDTO) throws Exception;
-	
 
 }
