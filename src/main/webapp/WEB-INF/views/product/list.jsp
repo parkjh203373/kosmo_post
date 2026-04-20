@@ -50,19 +50,20 @@
 	                    		<tbody>
 			                    	<c:forEach items="${list}" var="d">
 			                    		<tr>
-			                    			<td>${d.productNum}</td>
-			                    			<td><c:forEach items="${d.list}" var="f">
-		                   							<img src="/files/${name}/${f.fileName}" class="img-thumbnail" style="width: 200px; height: auto; display: block; box-shadow: 2px 2px 5px rgba(0,0,0,0.1);"></h4>
-		                   						</c:forEach></td>
-			                    			<td>
+			                    			<td class="align-middle">${d.productNum}</td>
+			                    			<td><c:if test="${not empty d.productFileDTO}">
+        										<img src="/files/${name}/${d.productFileDTO.fileName}" class="img-thumbnail" style="width: 200px; height: auto;">
+    											</c:if>
+    										</td>
+			                    			<td class="align-middle">
 			                    				<a href="./detail?productNum=${d.productNum}">
 			                    					<c:catch>
 			                    						<c:forEach begin="1" end="${d.productDepth}">--</c:forEach>
 			                    					</c:catch>${d.productName}
 			                    				</a>
 			                    			</td>
-			                    			<td>${d.productType}</td>
-			                    			<td>${d.productRate}</td>
+			                    			<td class="align-middle">${d.productType}</td>
+			                    			<td class="align-middle">${d.productRate}%</td>
 			                    		</tr>
 			                    	</c:forEach>
 			                    </tbody>

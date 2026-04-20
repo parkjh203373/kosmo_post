@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.winter.app.board.BoardDTO;
+import com.winter.app.board.notice.NoticeDTO;
 import com.winter.app.pager.Pager;
 
 @Controller
@@ -34,6 +36,15 @@ public class ProductController {
 		
 		
 		return "product/list";
+		
+	}
+	
+	@GetMapping("detail")
+	public String detail(ProductDTO productDTO, Model model) throws Exception {
+		productDTO = productService.detail(productDTO);
+		model.addAttribute("d", productDTO);
+		
+		return "product/detail";
 		
 	}
 	

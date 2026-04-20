@@ -27,11 +27,11 @@
         <result column="PRODUCT_TYPE" property="productType"/>
         <result column="PRODUCT_RATE" property="productRate"/>
         
-        <collection property="list" javaType="List" ofType="ProductFileDTO">
+        <association property="productFileDTO" javaType="ProductFileDTO">
             <id column="FILE_NUM" property="fileNum"/>
             <result column="FILE_NAME" property="fileName"/>
             <result column="ORI_NAME" property="oriName"/>
-        </collection>
+        </association>
     </resultMap>
   	
   	<select id="list" resultMap="ProductListResult" parameterType="Pager">
@@ -53,6 +53,26 @@
   		LIMIT #{perPage} OFFSET #{startNum}
   	</select>
   	-->
+  	
+  	<select id="detail" parameterType="ProductDTO" resultMap="detailResult">
+		SELECT * FROM "TB_PRODUCT" P
+		LEFT JOIN "TB_PRODUCTFILE" F
+		USING ("PRODUCT_NUM")
+		WHERE "PRODUCT_NUM" = #{productNum}
+	</select>
+	
+	<resultMap type="ProductDTO" id="detailResult">
+		<id column="PRODUCT_NUM" property="productNum"/>
+		<result column="PRODUCT_NAME" property="productName"/>
+		<result column="PRODUCT_CONTENTS" property="productContents"/>
+		<result column="PRODUCT_TYPE" property="productType"/>
+		<result column="PRODUCT_RATE" property="productRate"/>
+		<association property="productFileDTO" javaType="ProductFileDTO">
+			<id column="FILE_NUM" property="fileNum"/>
+			<result column="FILE_NAME" property="fileName"/>
+			<result column="ORI_NAME" property="oriName"/>
+		</association>
+	</resultMap>
   	
   	<insert id="create" parameterType="ProductDTO" useGeneratedKeys="true" keyProperty="productNum">
   		INSERT INTO "TB_PRODUCT" VALUES (

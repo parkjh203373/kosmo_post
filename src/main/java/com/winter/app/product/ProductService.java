@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.winter.app.board.BoardDTO;
 import com.winter.app.file.FileManager;
 import com.winter.app.pager.Pager;
 
@@ -25,6 +26,11 @@ public class ProductService {
 		pager.makeStartNum();
 		
 		return productMapper.list(pager);		
+	}
+	
+	public ProductDTO detail(ProductDTO productDTO) throws Exception {
+		return productMapper.detail(productDTO);
+
 	}
 	
 	public int create(ProductDTO productDTO, MultipartFile[] attach) throws Exception {

@@ -1,7 +1,5 @@
 package com.winter.app.product;
 
-import java.util.List;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,6 +14,6 @@ public class ProductDTO {
 	private String productContents;
 	private String productType;
 	private Double productRate;
-	private List<ProductFileDTO> list;
+	private ProductFileDTO productFileDTO;
 
 }

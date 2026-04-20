@@ -15,7 +15,13 @@
 			<div id="content">
 				<c:import url="/WEB-INF/views/temp/topbar.jsp"></c:import>
 				<div class="container-fluid">
-                    <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Home</h1>
+                    <c:if test="${not empty member}">
+                    	<h3>로그인 상태</h3>
+                    </c:if>
+                    <c:if test="${empty member}">
+                    	<h3>비로그인 상태</h3>
+                    </c:if>
                 </div>
                 <!-- end container-fluid -->
 			</div>
