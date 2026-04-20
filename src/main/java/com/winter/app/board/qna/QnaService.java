@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.winter.app.board.BoardDTO;
 import com.winter.app.board.BoardService;
+import com.winter.app.file.FileDTO;
 import com.winter.app.file.FileManager;
 import com.winter.app.pager.Pager;
 
@@ -33,7 +34,7 @@ public class QnaService implements BoardService {
 	@Override
 	public BoardDTO detail(BoardDTO boardDTO) throws Exception {
 
-		return null;
+		return qnaMapper.detail(boardDTO);
 	}
 
 	@Override
@@ -63,15 +64,25 @@ public class QnaService implements BoardService {
 	}
 
 	@Override
-	public int update(BoardDTO boardDTO) throws Exception {
+	public int update(BoardDTO boardDTO, MultipartFile[] attach) throws Exception {
+		int result = qnaMapper.update(boardDTO);
 
-		return 0;
+		return result;
 	}
 
 	@Override
 	public int delete(BoardDTO boardDTO) throws Exception {
+		boardDTO = qnaMapper.detail(boardDTO);
+		
+		for(FileDTO fileDTO:boardDTO.getList()) {
+			fileManager.fileDelete(name, fileDTO);
+			//qnaMapper.fileDelete(fileDTO);
+			qnaMapper.fileDeleteFor(boardDTO.getList());
+		}
+		
+		int result = qnaMapper.delete(boardDTO);
 
-		return 0;
+		return result;
 	}
 	
 	

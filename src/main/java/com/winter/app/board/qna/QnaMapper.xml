@@ -27,6 +27,27 @@
   		LIMIT #{perPage} OFFSET #{startNum}
   	</select>
   	
+  	<select id="detail" parameterType="QnaDTO" resultMap="detailResult">
+  		SELECT * FROM "TB_QNA" Q
+  			LEFT JOIN "TB_QNAFILE" F
+  			USING ("BOARD_NUM")
+  		WHERE "BOARD_NUM" = #{boardNum}
+  	</select>
+  	
+  	<resultMap type="QnaDTO" id="detailResult">
+  		<id column="BOARD_NUM" property="boardNum"/>
+  		<result column="BOARD_TITLE" property="boardTitle"/>
+  		<result column="BOARD_WRITER" property="boardWriter"/>
+  		<result column="BOARD_CONTENTS" property="boardContents"/>
+  		<result column="BOARD_DATE" property="boardDate"/>
+  		<result column="BOARD_HIT" property="boardHit"/>
+  		<collection property="list" javaType="java.util.List" ofType="FileDTO">
+  			<id column="FILE_NUM" property="fileNum"/>
+  			<result column="FILE_NAME" property="fileName"/>
+  			<result column="ORI_NAME" property="oriName"/>
+  		</collection>
+  	</resultMap>
+  	
   	<insert id="create" parameterType="QnaDTO" useGeneratedKeys="true" keyProperty="boardNum">
   		INSERT INTO "TB_QNA" VALUES (
   			DEFAULT,
@@ -49,5 +70,32 @@
   			#{boardNum}
   		)
   	</insert>
+  	
+  	<update id="update" parameterType="QnaDTO">
+  		UPDATE "TB_QNA"
+  		SET
+  			"BOARD_TITLE" = #{boardTitle},
+  			"BOARD_CONTENTS" = #{boardContents}
+  		WHERE "BOARD_NUM" = #{boardNum}
+  	</update>
+  	
+  	<delete id="delete" parameterType="QnaDTO">
+		DELETE FROM "TB_QNA"
+		WHERE "BOARD_NUM" = #{boardNum}
+	</delete>
+	
+	<delete id="fileDelete" parameterType="FileDTO">
+		DELETE FROM "TB_QNAFILE"
+		WHERE "FILE_NUM" = #{fileNum}
+	</delete>
+	
+	<delete id="fileDeleteFor" parameterType="java.util.List">
+		DELETE FROM "TB_QNAFILE"
+		WHERE "FILE_NUM" IN
+		<foreach item="item" index="index" collection="list"
+			open="(" separator="," close=")">
+			#{item.fileNum}
+		</foreach>
+	</delete>
   
   </mapper>

@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.winter.app.board.BoardDTO;
 import com.winter.app.board.BoardService;
+import com.winter.app.file.FileDTO;
 import com.winter.app.file.FileManager;
 import com.winter.app.pager.Pager;
 
@@ -32,8 +33,8 @@ public class NoticeService implements BoardService {
 
 	@Override
 	public BoardDTO detail(BoardDTO boardDTO) throws Exception {
+		return noticeMapper.detail(boardDTO);
 
-		return null;
 	}
 
 	@Override
@@ -66,15 +67,23 @@ public class NoticeService implements BoardService {
 	}
 
 	@Override
-	public int update(BoardDTO boardDTO) throws Exception {
+	public int update(BoardDTO boardDTO, MultipartFile[] attach) throws Exception {
+		int result = noticeMapper.update(boardDTO);
 
-		return 0;
+		return result;
 	}
 
 	@Override
 	public int delete(BoardDTO boardDTO) throws Exception {
+		boardDTO = noticeMapper.detail(boardDTO);
+		
+		for(FileDTO fileDTO:boardDTO.getList()) {
+			fileManager.fileDelete(name, fileDTO);
+		}
+		
+		int result = noticeMapper.delete(boardDTO);
 
-		return 0;
+		return result;
 	}
 	
 	
