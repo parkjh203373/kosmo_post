@@ -27,6 +27,15 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	@GetMapping("mypage")
+	public String mypage(HttpSession session) throws Exception {
+		Object obj = session.getAttribute("member");
+		if(obj==null) {
+			return "redirect:./login";
+		}
+		return "member/mypage";
+	}
+	
 	@GetMapping("login")
 	public void login() throws Exception {}
 	
