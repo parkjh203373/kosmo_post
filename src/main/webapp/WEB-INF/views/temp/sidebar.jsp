@@ -38,8 +38,10 @@
 			<div class="bg-white py-2 collapse-inner rounded">
 				<a class="collapse-item" href="/notice/list">Notice</a>
 				<a class="collapse-item" href="/qna/list">QnA</a>
+				<a class="collapse-item" href="/product/list">Product</a>
 			</div>
-		</div></li>
+		</div>
+	</li>
 
 	<!-- Nav Item - Utilities Collapse Menu -->
 	<li class="nav-item"><a class="nav-link collapsed" href="#"

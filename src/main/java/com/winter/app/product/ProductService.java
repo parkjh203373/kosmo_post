@@ -33,27 +33,20 @@ public class ProductService {
 
 	}
 	
-	public int create(ProductDTO productDTO, MultipartFile[] attach) throws Exception {
+	public int create(ProductDTO productDTO, MultipartFile attach) throws Exception {
 		int result = productMapper.create(productDTO);
 		
-		if(attach==null) {
-			return result;
-		}
-		
-		for(MultipartFile f:attach) {
-			if(f.isEmpty()) {
-				continue;
-			}
-			String fileName = fileManager.fileSave(name, f);
+		if(attach!=null && (!attach.isEmpty())) {
+			String fileName = fileManager.fileSave(name, attach);
 			
 			ProductFileDTO productFileDTO = new ProductFileDTO();
-			productFileDTO.setOriName(f.getOriginalFilename());
+			productFileDTO.setOriName(attach.getOriginalFilename());
 			productFileDTO.setProductNum(productDTO.getProductNum());
 			productFileDTO.setFileName(fileName);
 			
 			result = productMapper.createFile(productFileDTO);
-			
 		}
+		
 		
 		return result;
 	}

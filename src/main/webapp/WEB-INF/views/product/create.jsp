@@ -22,7 +22,7 @@
                     	<form action="./create" method="post" enctype="multipart/form-data">
 							<div class="form-group">
 						    	<label for="productName">이름</label>
-						    	<input type="text" name="productName" value="${d.productName}" class="form-control" id="productName">
+						    	<input type="text" name="productName" class="form-control" id="productName">
 						  	</div>
 						  	<div class="form-group">
 						  		<label for="productContents">설명</label>
@@ -30,11 +30,11 @@
 						  	</div>
 						  	<div class="form-group">
 						    	<label for="productType">종류</label>
-						    	<input type="text" name="productType" value="${d.productType}" class="form-control" id="productType">
+						    	<input type="text" name="productType" class="form-control" id="productType">
 						  	</div>
 						  	<div class="form-group">
 						    	<label for="productRate">이율</label>
-						    	<input type="text" name="productRate" value="${d.productRate}" class="form-control" id="productRate">
+						    	<input type="text" name="productRate" class="form-control" id="productRate">
 						  	</div>
 						  	
 						  	<div class="form-group">

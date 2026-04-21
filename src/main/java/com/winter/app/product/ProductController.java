@@ -55,7 +55,7 @@ public class ProductController {
 	}
 	
 	@PostMapping("create")
-	public String create(ProductDTO productDTO, @RequestParam("attach") MultipartFile[] attach) throws Exception {
+	public String create(ProductDTO productDTO, @RequestParam("attach") MultipartFile attach) throws Exception {
 		int result = productService.create(productDTO, attach);
 		
 		return "redirect:./list";

@@ -21,11 +21,11 @@
 	                   		<table class="table table-hover">
 	                   			<thead>
 	                   				<tr class="table-secondary">
-	                   					<th>이미지</th>
-	                   					<th>이름</th>
+	                   					<th style="width: 15%;"></th>
+	                   					<th style="width: 20%;">이름</th>
 	                   					<th>내용</th>
 	                   					<th style="width: 10%;">종류</th>
-	                   					<th style="width: 10%;">이율</th>
+	                   					<th style="width: 7%;">이율</th>
 	                   				</tr>
 	                   			</thead>
 	                   			<tbody>
@@ -47,13 +47,14 @@
 	                   			</tbody>
 	                   		</table>
                     
-	                    <div>
-	                    	<a class="btn btn-info" href="./update?productNum=${d.productNum}">수정</a>
-	                    	<form action="./delete" method="post">
-	                    		<input type="hidden" name="productNum" value="${d.productNum}">
-	                    		<button type="submit" class="btn btn-info">삭제</button>
-	                    	</form>
-	                    </div>
+		                    <div class="d-flex align-items-center">
+		                    	<a class="btn btn-info mr-3" href="./update?productNum=${d.productNum}">수정</a>
+		                    	<form action="./delete" method="post" class="mb-0 mr-3">
+		                    		<input type="hidden" name="productNum" value="${d.productNum}">
+		                    		<button type="submit" class="btn btn-info">삭제</button>
+		                    	</form>
+		                    	<a href="../account/create?productNum=${d.productNum}" class="btn btn-info">상품 가입</a>
+		                    </div>
 	                    </div>
                 <!-- end container-fluid -->
 			</div>

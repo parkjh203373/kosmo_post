@@ -22,13 +22,13 @@
 	                 	  	<div>
 	                   			<form action="./list" method="get">
 		                	   		<div class="input-group mb-3">
-		                	   		<div class="input-group-prepend">
-		                	   			<select name="kind" class="custom-select">
-		                	   				<option ${pager.kind eq 'v1'?'selected':''} value="v1">Name</option>
-		                	   				<option ${pager.kind eq 'v2'?'selected':''} value="v2">Contents</option>
-		                	   				<option ${pager.kind eq 'v3'?'selected':''} value="v3">Type</option>
-		                	   			</select>
-  									</div>
+			                	   		<div class="input-group-prepend">
+			                	   			<select name="kind" class="custom-select">
+			                	   				<option ${pager.kind eq 'v1'?'selected':''} value="v1">Name</option>
+			                	   				<option ${pager.kind eq 'v2'?'selected':''} value="v2">Contents</option>
+			                	   				<option ${pager.kind eq 'v3'?'selected':''} value="v3">Type</option>
+			                	   			</select>
+	  									</div>
 	  									<input type="text" value="${pager.search}" name="search" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
 	  									<div class="input-group-append">
 	    									<button class="btn btn-outline-secondary" type="submit" id="button-addon2">검색</button>
@@ -43,7 +43,7 @@
 	                    				<th>번호</th>
 	                    				<th></th>
 	                    				<th style="width: 40%;">이름</th>
-	                    				<th style="width: 10%;">종류</th>
+	                    				<th style="width: 15%;">종류</th>
 	                    				<th style="width: 10%;">이율</th>
 	                    			</tr>
 	                    		</thead>
@@ -51,16 +51,13 @@
 			                    	<c:forEach items="${list}" var="d">
 			                    		<tr>
 			                    			<td class="align-middle">${d.productNum}</td>
-			                    			<td><c:if test="${not empty d.productFileDTO}">
-        										<img src="/files/${name}/${d.productFileDTO.fileName}" class="img-thumbnail" style="width: 200px; height: auto;">
+			                    			<td>
+			                    				<c:if test="${not empty d.productFileDTO}">
+        											<img src="/files/${name}/${d.productFileDTO.fileName}" class="img-thumbnail" style="width: 200px; height: auto;">
     											</c:if>
     										</td>
 			                    			<td class="align-middle">
-			                    				<a href="./detail?productNum=${d.productNum}">
-			                    					<c:catch>
-			                    						<c:forEach begin="1" end="${d.productDepth}">--</c:forEach>
-			                    					</c:catch>${d.productName}
-			                    				</a>
+			                    				<a href="./detail?productNum=${d.productNum}">${d.productName}</a>
 			                    			</td>
 			                    			<td class="align-middle">${d.productType}</td>
 			                    			<td class="align-middle">${d.productRate}%</td>
@@ -91,7 +88,7 @@
 	                    	</div>
 	                    	
 	                    	<div>
-	                    		<a href="./create">글 쓰기</a>
+	                    		<a href="./create">상품 추가</a>
 	                    	</div>
 	                    	
 	                    </div>
