@@ -36,11 +36,7 @@
     										</c:if>
     									</td>
 	                   					<td class="align-middle">${d.productName}</td>  
-	                   					<td class="align-middle">
-	                   						<div>
-	                   							${d.productContents}
-	                   						</div>
-	                   					</td>
+	                   					<td class="align-middle">${d.productContents}</td>
 	                   					<td class="align-middle">${d.productType}</td>
 	                   					<td class="align-middle">${d.productRate}%</td>
 	                   				</tr>
@@ -53,7 +49,8 @@
 		                    		<input type="hidden" name="productNum" value="${d.productNum}">
 		                    		<button type="submit" class="btn btn-info">삭제</button>
 		                    	</form>
-		                    	<a href="../account/create?productNum=${d.productNum}" class="btn btn-info">상품 가입</a>
+		                    	<a href="../account/create?productNum=${d.productNum}" class="btn btn-info mr-3">상품 가입</a>
+		                    	<button class="btn btn-info mr-3" id="create" data-pn="${d.productNum}">장바구니 담기</button>
 		                    </div>
 	                    </div>
                 <!-- end container-fluid -->
@@ -68,6 +65,6 @@
                     
                     
                     
-                    
+    <script src="/js/cart/cart.js"></script>
 </body>
 </html>
