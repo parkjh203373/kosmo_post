@@ -10,5 +10,6 @@ public interface MemberMapper {
 	public abstract int addProfile(ProfileDTO profileDTO) throws Exception;
 	
 	public abstract MemberDTO detail(MemberDTO memberDTO) throws Exception;
+	
 
 }

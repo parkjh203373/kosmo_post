@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/notice/*")
 @Slf4j
+@CrossOrigin("*")
 public class NoticeController {
 	
 	@Autowired
@@ -47,6 +49,13 @@ public class NoticeController {
 	@GetMapping("detail")
 	public String detail(NoticeDTO noticeDTO, Model model) throws Exception {
 		BoardDTO boardDTO = noticeService.detail(noticeDTO);
+		if(boardDTO==null || boardDTO.getBoardNum()==null) {
+			model.addAttribute("result", "없는 번호입니다");
+			model.addAttribute("url", "./list");
+			
+			return "commons/result";
+		}
+		
 		model.addAttribute("d", boardDTO);
 		
 		return "board/detail";
@@ -60,10 +69,14 @@ public class NoticeController {
 	}
 	
 	@PostMapping("create")
-	public String create(NoticeDTO noticeDTO, @RequestParam("attach") MultipartFile[] attach) throws Exception {
+	public String create(NoticeDTO noticeDTO, @RequestParam(value="attach", required=false) MultipartFile[] attach, Model model) throws Exception {
 		int result = noticeService.create(noticeDTO, attach);
+		if(result>0) {
+			model.addAttribute("result", "글 등록 성공");
+			model.addAttribute("url", "./list");
+		}
 		
-		return "redirect:./list";
+		return "commons/result";
 	}
 	
 	@GetMapping("update")

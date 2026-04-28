@@ -19,10 +19,11 @@
                     
                     <div>
                     	<div class="row"> <div class="col-md-6">
-                    	<form action="./join" method="post" enctype="multipart/form-data">
+                    	<form action="./join" method="post" enctype="multipart/form-data" id="frm">
 	                    	<div class="mb-3">
 	                    		<label for="username" class="form-label">아이디</label>
 						        <input type="text" class="form-control" name="username" id="username">
+						        <span id="username_result"></span>
 						    </div>
 						
 						    <div class="mb-3">
@@ -33,6 +34,13 @@
 						    <div class="mb-3">
 						        <label for="password" class="form-label">비밀번호</label>
 						        <input type="password" class="form-control" name="password" id="password">
+						        <span id="password_result"></span>
+						    </div>
+						    
+						    <div class="mb-3">
+						        <label for="passwordCheck" class="form-label">비밀번호 확인</label>
+						        <input type="password" class="form-control" name="passwordCheck" id="passwordCheck">
+						        <span id="passwordCheck_result"></span>
 						    </div>
 						
 						    <div class="mb-3">
@@ -54,11 +62,11 @@
 						        <label class="form-label">첨부파일</label>
 						        <input type="file" name="attach" class="form-control">
 						    </div>
-						
-						    <div class="text-start mt-4">
-						    	<button type="submit" class="btn btn-primary px-5">회원가입</button>
-						    </div>
-					    
+							
+							<div class="text-start mt-4">
+							    <button type="button" class="btn btn-primary px-5" id="btn">회원가입</button>
+							</div>
+					    	
 						</form>
                     </div>
                     
@@ -72,5 +80,7 @@
 	</div>
 	<!-- end wrapper -->
 	<c:import url="/WEB-INF/views/temp/footer_script.jsp"></c:import>
+	
+	<script src="/js/member/join.js"></script>
 </body>
 </html>

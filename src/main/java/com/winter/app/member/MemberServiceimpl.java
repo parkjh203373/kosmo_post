@@ -54,4 +54,12 @@ public class MemberServiceimpl implements MemberService {
 		return null;
 	}
 
+	@Override
+	public MemberDTO idCheck(MemberDTO memberDTO) throws Exception {
+		
+		return memberMapper.detail(memberDTO);
+	}
+	
+	
+
 }

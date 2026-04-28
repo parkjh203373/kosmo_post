@@ -2,6 +2,7 @@ package com.winter.app.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,19 @@ public class MemberController {
 		int result = memberService.join(memberDTO, attach);
 		
 		return "redirect:/";
+	}
+	
+	@GetMapping("idCheck")
+	public String idCheck(MemberDTO memberDTO, Model model) throws Exception {
+		memberDTO = memberService.idCheck(memberDTO);
+		int result = 0;
+		if(memberDTO == null) {
+			result = 1;
+		}
+		
+		model.addAttribute("result", result);
+		
+		return "commons/ajaxResult";
 	}
 	
 	@GetMapping("login")

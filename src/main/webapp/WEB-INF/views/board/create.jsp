@@ -33,13 +33,16 @@
 						    	<textarea rows="8" cols="" name="boardContents" class="form-control" id="boardContents"></textarea>
 						  	</div>
 						  	
-						  	<div class="form-group">
+							<div>
+								<button type="button" id="add">File add</button>
+							</div>
+
+						  	<div class="form-group" id="result">
 						  		<label>첨부파일</label>
-						  		<input type="file" name="attach" class="form-control">
-						  		<input type="file" name="attach" class="form-control">
+
 						  	</div>
 						  	
-						  <button type="submit" class="btn btn-primary">Submit</button>
+						  <button id="create" type="submit" class="btn btn-primary">Submit</button>
 						</form>
                     </div>
                     
@@ -62,5 +65,6 @@
       });
     </script>
     
+	<script src="/js/board/form.js"></script>
 </body>
 </html>
