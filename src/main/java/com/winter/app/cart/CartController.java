@@ -40,12 +40,16 @@ public class CartController {
 	}
 	
 	@GetMapping("list")
-	public String list(HttpSession session, Model model) throws Exception {
+	public String list(HttpSession session) throws Exception {
+	    if(session.getAttribute("member") == null) {
+	        return "redirect:../member/login";
+	    }
+	    return "cart/list";
+	}
+	
+	@GetMapping("cartList")
+	public void list(HttpSession session, Model model) throws Exception {
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
-		
-		if(memberDTO==null) {
-			return "redirect:../member/login";
-		}
 		
 		CartDTO cartDTO = new CartDTO();
 		cartDTO.setUsername(memberDTO.getUsername());
@@ -54,7 +58,18 @@ public class CartController {
 		model.addAttribute("list", ar);
 	    model.addAttribute("name", name);
 		
-		return "cart/list";
+	}
+	
+	@PostMapping("delete")
+	public String delete(HttpSession session, CartDTO cartDTO, Model model) throws Exception {
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		cartDTO.setUsername(memberDTO.getUsername());
+		int result = cartService.delete(cartDTO);
+		
+		model.addAttribute("result", result);
+		
+		return "commons/ajaxResult";
+		
 		
 	}
 

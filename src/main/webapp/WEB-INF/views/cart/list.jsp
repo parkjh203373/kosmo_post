@@ -29,37 +29,9 @@
 	                    				<th></th>
 	                    			</tr>
 	                    		</thead>
-	                    		<tbody>
-			                    	<c:forEach items="${list}" var="d">
-			                    		<tr>
-			                    			<td class="align-middle">
-			                    				<div>
-			                    					<input type="checkbox" class="ch">
-			                    				</div>
-			                    			</td>
-			                    			<td>
-			                    				<c:if test="${not empty d.productDTO.productFileDTO}">
-        											<img src="/files/${name}/${d.productDTO.productFileDTO.fileName}" class="img-thumbnail" style="width: 200px; height: auto;">
-    											</c:if>
-    										</td>
-			                    			<td class="align-middle">
-			                    				<a href="../product/detail?productNum=${d.productNum}">${d.productDTO.productName}</a>
-			                    			</td>
-			                    			<td class="align-middle">${d.productDTO.productType}</td>
-			                    			<td class="align-middle">${d.productDTO.productRate}%</td>
-			                    			<td class="align-middle text-center">
-			                    				<div class="d-flex flex-column align-items-center">
-											        <a href="../account/create?productNum=${d.productNum}" class="btn btn-success btn-sm mb-1" style="width: 60px;">가입</a>
-											        <button class="btn btn-danger btn-sm" style="width: 60px;">삭제</button>
-											    </div>
-			                    			</td>
-			                    		</tr>
-			                    	</c:forEach>
-			                    	<c:if test="${empty list}">
-				                        <tr>
-				                            <td colspan="6" class="text-center py-5">장바구니가 비어있습니다.</td>
-				                        </tr>
-				                    </c:if>
+	                    		<tbody id="list">
+			                    	
+			                    	
 			                    </tbody>
 	                    	</table>
 	                    	
@@ -87,7 +59,7 @@
 	                    	<div class="text-right mt-3">
 				                <a href="../product/list" class="btn btn-secondary">쇼핑 계속하기</a>
 				                <button class="btn btn-success">전체 상품 가입하기</button>
-				                <button class="btn btn-primary">선택 삭제</button>
+				                <button class="btn btn-primary" id="del2">선택 삭제</button>
 				            </div>
 	                    	
 	                    </div>

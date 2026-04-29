@@ -52,7 +52,39 @@
 		                    	<a href="../account/create?productNum=${d.productNum}" class="btn btn-info mr-3">상품 가입</a>
 		                    	<button class="btn btn-info mr-3" id="create" data-pn="${d.productNum}">장바구니 담기</button>
 		                    </div>
-	                    </div>
+							<hr class="my-5">
+							<div class="card shadow mb-4">
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">상품 후기 (댓글)</h6>
+								</div>
+								<div class="card-body">
+									<div id="review_list" class="mb-4">
+										<p class="text-center text-muted">등록된 댓글이 없습니다.</p>
+									</div>
+									
+									<div class="form-group d-flex align-items-center mb-2">
+								        <label for="review_star" class="mb-0 mr-2 font-weight-bold">평점 : </label>
+								        <select class="form-control col-2" id="review_star">
+								            <option value="5">★★★★★</option>
+								            <option value="4">★★★★☆</option>
+								            <option value="3">★★★☆☆</option>
+								            <option value="2">★★☆☆☆</option>
+								            <option value="1">★☆☆☆☆</option>
+								            <option value="0">☆☆☆☆☆</option>
+								        </select>
+								    </div>
+	
+									<div class="input-group">
+										<textarea id="review_contents" class="form-control" rows="3"
+											placeholder="댓글을 입력해주세요."></textarea>
+										<div class="input-group-append">
+											<button class="btn btn-primary px-4" type="button"
+												id="review_add">등록</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
                 <!-- end container-fluid -->
 			</div>
 			<!-- end content -->

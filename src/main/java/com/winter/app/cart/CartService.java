@@ -11,14 +11,16 @@ public class CartService {
 	@Autowired
 	private CartMapper cartMapper;
 	
-	public int create(CartDTO cartDTO) throws Exception {
-		
+	public int create(CartDTO cartDTO) throws Exception {		
 		return cartMapper.create(cartDTO);
 	}
 	
 	public List<CartDTO> list(CartDTO cartDTO) throws Exception {
-		
 		return cartMapper.list(cartDTO);
+	}
+	
+	public int delete(CartDTO cartDTO) throws Exception {
+		return cartMapper.delete(cartDTO);
 	}
 
 }

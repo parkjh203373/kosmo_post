@@ -6,6 +6,11 @@
 
 
 <mapper namespace="com.winter.app.cart.CartMapper">
+
+	<delete id="delete" parameterType="CartDTO">
+		DELETE FROM "TB_CART"
+		WHERE "USERNAME" = #{username} AND "PRODUCT_NUM" = #{productNum}
+	</delete>
   	
 	<insert id="create" parameterType="CartDTO">
 		INSERT INTO "TB_CART" VALUES (#{username}, #{productNum})

@@ -10,5 +10,7 @@ public interface CartMapper {
 	public abstract int create(CartDTO cartDTO) throws Exception;
 	
 	public abstract List<CartDTO> list(CartDTO cartDTO) throws Exception;
+	
+	public abstract int delete(CartDTO cartDTO) throws Exception;
 
 }
