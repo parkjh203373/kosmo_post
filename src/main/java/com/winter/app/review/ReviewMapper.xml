@@ -23,6 +23,21 @@
 	    WHERE "PRODUCT_NUM" = #{productNum}
 	    ORDER BY "REVIEW_NUM" DESC
 	</select>
+	
+	<update id="update" parameterType="ReviewDTO">
+	    UPDATE "TB_REVIEW"
+	    SET 
+	        "REVIEW_CONTENTS" = #{reviewContents},
+	        "REVIEW_STAR" = #{reviewStar},
+	        "REVIEW_DATE" = now()
+	    WHERE "REVIEW_NUM" = #{reviewNum} 
+	    AND "USERNAME" = #{username}
+	</update>
+	
+	<delete id="delete" parameterType="ReviewDTO">
+    	DELETE FROM "TB_REVIEW"
+    	WHERE "REVIEW_NUM" = #{reviewNum}
+	</delete>
 
 
 </mapper>

@@ -42,5 +42,32 @@ public class ReviewController {
 	    model.addAttribute("list", list);
 	    return "review/list"; // review/list.jsp를 찾아감
 	}
+	
+	@PostMapping("update")
+	@ResponseBody
+	public int update(ReviewDTO reviewDTO, HttpSession session, Model model) throws Exception {
+	    MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+	    if(memberDTO == null) {
+	        return -1;
+	    }
+	    
+	    reviewDTO.setUsername(memberDTO.getUsername());
+	    
+	    return reviewService.update(reviewDTO);
+	}
+	
+	@PostMapping("delete")
+	@ResponseBody
+	public int delete(ReviewDTO reviewDTO, HttpSession session, Model model) throws Exception {
+	    MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+	    
+	    if(memberDTO == null) {
+	        return -1;
+	    }
+
+	    reviewDTO.setUsername(memberDTO.getUsername());
+	    
+	    return reviewService.delete(reviewDTO);
+	}
 
 }

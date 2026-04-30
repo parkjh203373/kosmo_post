@@ -75,11 +75,9 @@
 								    </div>
 	
 									<div class="input-group">
-										<textarea id="review_contents" class="form-control" rows="3"
-											placeholder="댓글을 입력해주세요."></textarea>
+										<textarea id="review_contents" class="form-control" rows="3" placeholder="댓글을 입력해주세요."></textarea>
 										<div class="input-group-append">
-											<button class="btn btn-primary px-4" type="button"
-												id="review_add">등록</button>
+											<button class="btn btn-primary px-4" type="button" id="review_add">등록</button>
 										</div>
 									</div>
 								</div>
@@ -93,6 +91,37 @@
 		<!-- end content-wrapper -->
 	</div>
 	<!-- end wrapper -->
+	
+	<div>
+		<div class="modal fade" id="review_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">댓글 수정</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        <label for="review_star" class="mb-0 mr-2 font-weight-bold">평점 : </label>
+					<select class="form-control col-4" id="star_update">
+						<option value="5">★★★★★</option>
+						<option value="4">★★★★☆</option>
+						<option value="3">★★★☆☆</option>
+						<option value="2">★★☆☆☆</option>
+						<option value="1">★☆☆☆☆</option>
+						<option value="0">☆☆☆☆☆</option>
+					</select>
+		        <textarea class="col-12 mt-2" rows="5" id="contents_update"></textarea>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+		        <button type="button" class="btn btn-primary" id="update_save">수정</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</div>
 	<c:import url="/WEB-INF/views/temp/footer_script.jsp"></c:import>
                     
                     

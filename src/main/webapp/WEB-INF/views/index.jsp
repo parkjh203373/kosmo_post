@@ -22,6 +22,8 @@
                     <c:if test="${empty member}">
                     	<h3>비로그인 상태</h3>
                     </c:if>
+                    <div id="map" style="width:500px;height:400px;"></div>
+					
                 </div>
                 <!-- end container-fluid -->
 			</div>
@@ -31,6 +33,17 @@
 		<!-- end content-wrapper -->
 	</div>
 	<!-- end wrapper -->
+	
 	<c:import url="/WEB-INF/views/temp/footer_script.jsp"></c:import>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8c3aee1f4922c98ea860b51fda94ab2c"></script>
+	<script>
+		const container = document.getElementById('map');
+		let options = {
+			center : new kakao.maps.LatLng(33.450701, 126.570667),
+			level : 3
+		};
+
+		let map = new kakao.maps.Map(container, options);
+	</script>
 </body>
 </html>

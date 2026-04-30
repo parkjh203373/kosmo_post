@@ -15,11 +15,17 @@
                         	</span>
                         	<small class="text-muted ml-1">(${dto.reviewStar})</small>
                         </div>
-                        <div class="mt-1">
-                            ${dto.reviewContents}
+                        <div class="mt-1">${dto.reviewContents}</div>
+                    </div>
+                    <div class="d-flex flex-column align-items-end">
+                        <div class="badge bg-light text-muted mb-2">
+                            ${dto.reviewDate.toString().replace('T', ' ').substring(0, 19)}
+                        </div>
+                        <div class="btn-group btn-group-sm">
+                            <button type="button" class="btn btn-outline-secondary review_update" data-contents="${dto.reviewContents}" data-num="${dto.reviewNum}" data-star="${dto.reviewStar}" data-toggle="modal" data-target="#review_modal">수정</button>
+                            <button type="button" class="btn btn-outline-danger review_del" data-num="${dto.reviewNum}">삭제</button>
                         </div>
                     </div>
-                    <span class="badge bg-light text-muted">${dto.reviewDate.toString().replace('T', ' ').substring(0, 19)}</span>
                 </li>
             </c:forEach>
         </ul>

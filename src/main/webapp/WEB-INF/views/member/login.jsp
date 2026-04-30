@@ -22,12 +22,12 @@
                     	<form action="./login" method="post" enctype="multipart/form-data">
 	                    	<div class="mb-3">
 	                    		<label for="username" class="form-label">아이디</label>
-						        <input type="text" class="form-control" name="username" id="username">
+						        <input type="text" value="test2" class="form-control" name="username" id="username">
 						    </div>
 						
 						    <div class="mb-3">
 						        <label for="password" class="form-label">비밀번호</label>
-						        <input type="password" class="form-control" name="password" id="password">
+						        <input type="password" value="test2" class="form-control" name="password" id="password">
 						    </div>
 						
 						    <div class="text-start mt-4">
