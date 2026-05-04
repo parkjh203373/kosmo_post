@@ -12,24 +12,45 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.winter.app.account.AccountController;
 import com.winter.app.board.BoardDTO;
 import com.winter.app.board.notice.NoticeDTO;
+import com.winter.app.file.FileDTO;
+import com.winter.app.member.MemberDTO;
 import com.winter.app.pager.Pager;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/qna/*")
 public class QnaController {
+
+    private final AccountController accountController;
 	
 	@Autowired
 	private QnaService qnaService;
 	
 	@Value("${app.board.qna}")
 	private String name;
+
+    QnaController(AccountController accountController) {
+        this.accountController = accountController;
+    }
 	
 	@ModelAttribute("name")
 	public String getName() {
 		return this.name;
+	}
+	
+	@GetMapping("down")
+	public String fileDown(QnaFileDTO qnaFileDTO, Model model) throws Exception {
+		FileDTO fileDTO = qnaService.fileDetail(qnaFileDTO);
+		
+		model.addAttribute("fileDTO", fileDTO);
+		
+		return "fileDownView";
 	}
 	
 	@GetMapping("list")
@@ -74,17 +95,29 @@ public class QnaController {
 	}
 	
 	@PostMapping("update")
-	public String update(QnaDTO qnaDTO, @RequestParam("attach") MultipartFile[] attach) throws Exception {
+	public ModelAndView update(QnaDTO qnaDTO, @RequestParam("attach") MultipartFile[] attach) throws Exception {
 		int result = qnaService.update(qnaDTO, attach);
 		
-		return "redirect:./list";
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("redirect:./list");
+		mv.addObject("d", qnaDTO);
+		
+		return mv;
 	}
 	
 	@PostMapping("delete")
-	public String delete(NoticeDTO noticeDTO) throws Exception {
-		int result = qnaService.delete(noticeDTO);
-		
-		return "redirect:./list";
+	public String delete(NoticeDTO noticeDTO, HttpSession session, Model model) throws Exception {
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		BoardDTO boardDTO = qnaService.detail(noticeDTO);
+		if(boardDTO.getBoardWriter().equals(memberDTO.getUsername())) {
+			int result = qnaService.delete(noticeDTO);
+			return "redirect:./list";
+		} else {
+			model.addAttribute("result", "작성자가 아님");
+			model.addAttribute("url", "./list");
+			return "commons/result";
+		}
 	}
 
 }

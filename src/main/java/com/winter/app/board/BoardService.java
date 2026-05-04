@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.winter.app.file.FileDTO;
 import com.winter.app.pager.Pager;
 
 public interface BoardService {
@@ -22,5 +23,7 @@ public interface BoardService {
 	
 	//Delete
 	public int delete(BoardDTO boardDTO) throws Exception;
+	
+	public FileDTO fileDetail(FileDTO fileDTO) throws Exception;
 
 }

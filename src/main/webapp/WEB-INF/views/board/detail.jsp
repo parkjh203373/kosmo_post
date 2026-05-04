@@ -39,7 +39,7 @@
 	                   					<td>
 	                   						<div>	                   						
 		                   						<c:forEach items="${d.list}" var="f">
-		                   							<h4><img src="/files/${name}/${f.fileName}"></h4>
+		                   							<h4><a href="./down?fileNum=${f.fileNum}">${f.oriName}</a></h4>
 		                   						</c:forEach>
 	                   						</div>
 	                   					</td>

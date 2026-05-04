@@ -80,6 +80,11 @@
 		DELETE FROM "TB_NOTICE"
 		WHERE "BOARD_NUM" = #{boardNum}
 	</delete>
+	
+	<select id="fileDetail" parameterType="FileDTO" resultType="FileDTO">
+		SELECT * FROM "TB_NOTICEFILE"
+		WHERE "FILE_NUM" = #{fileNum}
+	</select>
   
   
   </mapper>
