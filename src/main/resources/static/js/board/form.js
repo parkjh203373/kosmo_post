@@ -20,11 +20,12 @@ const create = document.getElementById("create")
 // <input type="file" name="attach" class="form-control">
 
 let idx = 1
-let count = 1
+let count = Number(result.getAttribute("data-file-size")) || 0
+
 
 add.addEventListener("click", function(){
 
-    if (count > 5) {
+    if (count >= 5) {
         alert("최대 5개만 넣을 수 있습니다.");
         return;
     }

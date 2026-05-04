@@ -66,6 +66,12 @@ public class QnaController {
 	@GetMapping("detail")
 	public String detail(QnaDTO qnaDTO, Model model) throws Exception {
 		BoardDTO boardDTO = qnaService.detail(qnaDTO);
+		if(boardDTO==null || boardDTO.getBoardNum()==null) {
+			model.addAttribute("result", "없는 번호입니다");
+			model.addAttribute("url", "./list");
+			
+			return "commons/result";
+		}
 		
 		model.addAttribute("d", boardDTO);
 		
@@ -80,10 +86,14 @@ public class QnaController {
 	}
 	
 	@PostMapping("create")
-	public String create(QnaDTO qnaDTO, @RequestParam("attach") MultipartFile[] attach) throws Exception {
+	public String create(QnaDTO qnaDTO, @RequestParam(value="attach", required=false) MultipartFile[] attach, Model model) throws Exception {
 		int result = qnaService.create(qnaDTO, attach);
+		if(result>0) {
+			model.addAttribute("result", "글 등록 성공");
+			model.addAttribute("url", "./list");
+		}
 		
-		return "redirect:./list";
+		return "commons/result";
 	}
 	
 	@GetMapping("update")
@@ -91,7 +101,7 @@ public class QnaController {
 		BoardDTO boardDTO = qnaService.detail(qnaDTO);
 		model.addAttribute("d", boardDTO);
 		
-		return "board/update";
+		return "board/board_form";
 	}
 	
 	@PostMapping("update")

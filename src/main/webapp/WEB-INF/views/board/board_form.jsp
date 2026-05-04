@@ -16,10 +16,11 @@
 			<div id="content">
 				<c:import url="/WEB-INF/views/temp/topbar.jsp"></c:import>
 				<div class="container-fluid">
-                    <h1 class="h3 mb-4 text-gray-800">Create Page</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Board_form Page</h1>
                     
                     <div>
-                    	<form action="./create" method="post" enctype="multipart/form-data">
+                    	<form method="post" enctype="multipart/form-data">
+                    		<input type="hidden" value="${d.boardNum}" name="boardNum">
 							<div class="form-group">
 						    	<label for="boardTitle">제목</label>
 						    	<input type="text" name="boardTitle" value="${d.boardTitle}" class="form-control" id="boardTitle">
@@ -30,18 +31,23 @@
 						  	</div>
 						  	<div class="form-group">
 						  		<label for="boardContents">내용</label>
-						    	<textarea rows="8" cols="" name="boardContents" class="form-control" id="boardContents"></textarea>
+						    	<textarea rows="8" cols="" name="boardContents" class="form-control" id="boardContents">${d.boardContents}</textarea>
 						  	</div>
 						  	
-							<div>
+						  	<div>
 								<button type="button" id="add">File add</button>
 							</div>
 
-						  	<div class="form-group" id="result">
+						  	<div class="form-group" id="result" data-file-size="${d.list.size()}">
 						  		<label>첨부파일</label>
+						  		<c:forEach items="${d.list}" var="f">
+						  			<div>
+						  				<span>${f.oriName}</span> <button type="button">X</button>
+						  			</div>
+						  		</c:forEach>
 						  	</div>
 						  	
-						  <button id="create" type="submit" class="btn btn-primary">Submit</button>
+						  <button type="submit" class="btn btn-primary">Submit</button>
 						</form>
                     </div>
                     
@@ -64,6 +70,6 @@
       });
     </script>
     
-	<script src="/js/board/form.js"></script>
+    <script src="/js/board/form.js"></script>
 </body>
 </html>
