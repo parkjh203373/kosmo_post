@@ -36,8 +36,8 @@ dependencies {
     implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api'
     runtimeOnly 'org.glassfish.web:jakarta.servlet.jsp.jstl'
 
-	// Source: https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop
-	implementation("org.springframework.boot:spring-boot-starter-aop:4.0.0-M2")
+	implementation("org.springframework.boot:spring-boot-starter-aop")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
 
 }
 

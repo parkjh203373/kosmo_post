@@ -16,32 +16,11 @@
 			<div id="content">
 				<c:import url="/WEB-INF/views/temp/topbar.jsp"></c:import>
 				<div class="container-fluid">
-                    <h1 class="h3 mb-4 text-gray-800">회원 가입</h1>
+                    <h1 class="h3 mb-4 text-gray-800">내 정보 수정</h1>
                     
                     <div>
                     	<div class="row"> <div class="col-md-6">
-                    	<form:form method="post" enctype="multipart/form-data" modelAttribute="memberDTO" id="frm">
-	                    	<div class="mb-3">
-	                    		<label for="username" class="form-label">아이디</label>
-	                    		<form:input path="username" cssclass="form-control" id="username"/>
-	                    		<form:errors path="username"></form:errors>
-						        <span id="username_result"></span>
-						    </div>
-
-						    <div class="mb-3">
-						        <label for="password" class="form-label">비밀번호</label>
-						        <form:password path="password" cssclass="form-control" id="password"/>
-						        <form:errors path="password"></form:errors>
-						        <span id="password_result"></span>
-						    </div>
-
-						    <div class="mb-3">
-						        <label for="passwordCheck" class="form-label">비밀번호 확인</label>
-						        <form:password path="passwordCheck" cssclass="form-control" id="passwordCheck"/>
-						        <form:errors path="passwordCheck"></form:errors>
-						        <span id="passwordCheck_result"></span>
-						    </div>
-						    
+                    	<form:form method="post" enctype="multipart/form-data" modelAttribute="memberDTO" id="frm">						    
 						    <div class="mb-3">
 						        <label for="name" class="form-label">이름</label>
 						        <form:input path="name" cssclass="form-control" id="name"/>
@@ -62,7 +41,7 @@
 						
 						    <div class="mb-3">
 						        <label for="birth" class="form-label">출생년월일</label>
-						        <input type="date" class="form-control" name="birth" id="birth" placeholder="0000-00-00">
+						        <input type="date" class="form-control" name="birth" id="birth" value="${memberDTO.birth}">
 						        <form:errors path="birth"></form:errors>
 						    </div>
 
